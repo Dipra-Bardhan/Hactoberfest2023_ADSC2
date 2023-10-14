@@ -1,0 +1,42 @@
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+def generate_random_color():
+    r = random.uniform(0, 1)
+    g = random.uniform(0, 1)
+    b = random.uniform(0, 1)
+    return (r, g, b)
+
+def generate_palette(num_colors):
+    palette = [generate_random_color() for _ in range(num_colors)]
+    return palette
+
+def display_palette(palette):
+    num_colors = len(palette)
+
+    fig, ax = plt.subplots()
+    for i, color in enumerate(palette):
+        ax.bar(i, 1, color=color)
+
+    ax.set_xlim(0, num_colors)
+    ax.set_xticks(np.arange(0, num_colors))
+    ax.set_xticklabels([f"Color {i+1}" for i in range(num_colors)])
+    ax.get_xaxis().tick_top()
+    ax.get_xaxis().set_tick_params(width=0)
+    ax.get_yaxis().set_tick_params(width=0)
+    plt.xticks(rotation=45)
+    plt.show()
+
+def main():
+    num_colors = int(input("Enter the number of colors in the palette: "))
+    palette = generate_palette(num_colors)
+
+    print("Generated Palette:")
+    for i, color in enumerate(palette):
+        print(f"Color {i+1}: RGB{color}")
+
+    display_palette(palette)
+
+if __name__ == "__main__":
+    main()
